@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+</head>
+<body>
+
+    <h1>Basic Calculator</h1>
+
+    <form id="calculatorForm">
+        <input type="text" id="leftMember" placeholder="Enter first number">
+        
+        <select id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+        
+        <input type="text" id="rightMember" placeholder="Enter second number">
+        
+        <input type="submit" value="Try me!">
+    </form>
+
+    <script src="calculator.js"></script>
+
+</body>
+</html>
+
+<script>
+// Function to handle the calculator logic
+function calculate(event) {
+    event.preventDefault();
+
+    const leftValue = document.getElementById('leftMember').value;
+    const operator = document.getElementById('operator').value;
+    const rightValue = document.getElementById('rightMember').value;
+
+    // Input Validation: Check if the inputs are positive integers
+    if (!leftValue.match(/^\d+$/) || !rightValue.match(/^\d+$/)) {
+        alert('Error :(');
+        console.log('Error: Invalid input. Both fields must contain positive integer values (>= 0).');
+        return;
+    }
+
+    const num1 = parseInt(leftValue, 10);
+    const num2 = parseInt(rightValue, 10);
+    let result;
+
+    // Handle division/modulo by zero
+    if ((operator === '/' || operator === '%') && num2 === 0) {
+        alert("It's over 9000!");
+        console.log(`It's over 9000! ${operator} by zero is not allowed.`);
+        return;
+    }
+
+    // Perform the selected operation
+    switch (operator) {
+        case '+': result = num1 + num2; break;
+        case '-': result = num1 - num2; break;
+        case '*': result = num1 * num2; break;
+        case '/': result = Math.floor(num1 / num2); break;
+        case '%': result = num1 % num2; break;
+        default:
+            alert('Error :(');
+            console.log('Error: Invalid operator.');
+            return;
+    }
+
+    alert(result);
+    console.log(`Calculation: ${num1} ${operator} ${num2} = ${result}`);
+}
+
+// Add event listener for form submission
+document.getElementById('calculatorForm').addEventListener('submit', calculate);
+
+// Set interval for recurring alert
+setInterval(() => {
+    alert('Please, use me...');
+}, 30000);
+
+
+</script>
