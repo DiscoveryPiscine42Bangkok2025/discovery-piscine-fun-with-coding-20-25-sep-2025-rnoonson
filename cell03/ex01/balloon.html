@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balloon</title>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+        font-family: sans-serif;
+    }
+    .balloon {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        border-radius: 50%; /* Creates the perfect round shape */
+        cursor: pointer;
+        transition: width 0.3s, height 0.3s, background-color 0.3s;
+    }
+</style>
+</head>
+<body>
+
+<div id="balloon" class="balloon"></div>
+
+<script>
+    const balloon = document.getElementById('balloon');
+    const colors = ['red', 'green', 'blue']; // The color cycle
+    let colorIndex = 0;
+    let size = 200;
+
+    // Handles the click event to grow the balloon
+    balloon.addEventListener('click', () => {
+        // Grow the balloon if it's not at the explosion point
+        if (size < 420) {
+            size += 10;
+            balloon.style.width = size + 'px';
+            balloon.style.height = size + 'px';
+
+            // Cycle through the colors
+            colorIndex = (colorIndex + 1) % colors.length;
+            balloon.style.backgroundColor = colors[colorIndex];
+        } else {
+            // Explode the balloon and reset it to the initial state
+            size = 200;
+            colorIndex = 0;
+            balloon.style.width = size + 'px';
+            balloon.style.height = size + 'px';
+            balloon.style.backgroundColor = colors[colorIndex];
+        }
+    });
+
+    // Handles the mouseout event to shrink the balloon
+    balloon.addEventListener('mouseout', () => {
+        // Shrink the balloon if it's not at the minimum size
+        if (size > 200) {
+            size -= 5;
+            balloon.style.width = size + 'px';
+            balloon.style.height = size + 'px';
+
+            // Cycle through the colors in reverse order
+            colorIndex = (colorIndex - 1 + colors.length) % colors.length;
+            balloon.style.backgroundColor = colors[colorIndex];
+        }
+    });
+</script>
+
+</body>
+</html>
