@@ -1,0 +1,25 @@
+  <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Background Color Changer</title>
+        <link rel="stylesheet" href="backgroound.css"> <!-- Optional: for styling the button -->
+    
+    
+    </head>
+    <body>
+        <button id="colorChangeButton">click me</button>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    </body>
+    </html>
+
+    <script>
+    const button = document.getElementById('colorChangeButton');
+
+    button.addEventListener('click', () => {
+        // Generate a random color
+        const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+        document.body.style.backgroundColor = randomColor;
+    });
+    </script>
